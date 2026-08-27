@@ -1,9 +1,9 @@
 // Karua Drilling Service Worker
 // Version 1.0.0
 
-const CACHE_NAME = 'karua-drilling-v1';
-const STATIC_CACHE = 'karua-static-v1';
-const DYNAMIC_CACHE = 'karua-dynamic-v1';
+const CACHE_NAME = 'karua-drilling-v2';
+const STATIC_CACHE = 'karua-static-v2';
+const DYNAMIC_CACHE = 'karua-dynamic-v2';
 
 // Assets to cache on install
 const STATIC_ASSETS = [

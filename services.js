@@ -6,18 +6,31 @@
 // ========================================
 // PRELOADER
 // ========================================
-window.addEventListener('load', function() {
-    const preloader = document.getElementById('preloader');
-    if (preloader) {
+(function() {
+    let hidden = false;
+
+    function hidePreloader() {
+        if (hidden) return;
+        const preloader = document.getElementById('preloader');
+        if (!preloader) return;
+        hidden = true;
+        preloader.classList.add('loaded');
+        // Remove from DOM after transition
         setTimeout(function() {
-            preloader.classList.add('loaded');
-            // Remove from DOM after transition
-            setTimeout(function() {
-                preloader.style.display = 'none';
-            }, 500);
-        }, 1500); // Show preloader for 1.5 seconds minimum
+            preloader.style.display = 'none';
+        }, 500);
     }
-});
+
+    // Normal path: everything has loaded, keep the preloader up for a 1.5s minimum.
+    window.addEventListener('load', function() {
+        setTimeout(hidePreloader, 1500);
+    });
+
+    // Failsafe: 'load' waits on every image and video, so a single slow or
+    // stalled asset would otherwise leave visitors staring at the preloader
+    // forever. Reveal the page regardless once this deadline passes.
+    setTimeout(hidePreloader, 5000);
+})();
 
 document.addEventListener('DOMContentLoaded', function() {
     
